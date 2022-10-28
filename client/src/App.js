@@ -31,18 +31,11 @@ function App() {
   return (
     <ApolloProvider client={client}>
       <header className="App-header">
-        <h1>Liqourlicious</h1>
+        <h1>Liquorlicious</h1>
         <p>
-          Edit <code>src/App.js</code> and save to reload.
+          An app where you can search beverage recipes.
         </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        
       </header>
     </ApolloProvider>
   );
