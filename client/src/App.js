@@ -2,7 +2,6 @@ import React from 'react';
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
   createHttpLink,
   ApolloProvider,
 } from "@apollo/client";
@@ -30,13 +29,17 @@ const client = new ApolloClient({
 function App() {
   return (
     <ApolloProvider client={client}>
-      <header className="App-header">
-        <h1>Liquorlicious</h1>
-        <p>
-          An app where you can search beverage recipes.
-        </p>
-        
-      </header>
+      <Router>
+        <>
+        <Navbar />
+        <Switch>
+          <Route exact path='/' component={SearchRecipes} />
+          <Route exact path='/saved' component={SavedRecipes} />
+          <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
+        </Switch>
+        </>
+      </Router>
+      
     </ApolloProvider>
   );
 }
