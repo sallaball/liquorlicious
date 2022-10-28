@@ -2,8 +2,9 @@ import React from 'react';
 import {
   ApolloClient,
   InMemoryCache,
-  ApolloProvider,
+  // ApolloProvider,
   createHttpLink,
+  ApolloProvider,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
@@ -28,9 +29,9 @@ const client = new ApolloClient({
 
 function App() {
   return (
-    <div className="App">
+    <ApolloProvider client={client}>
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
+        <h1>Liqourlicious</h1>
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
@@ -43,7 +44,7 @@ function App() {
           Learn React
         </a>
       </header>
-    </div>
+    </ApolloProvider>
   );
 }
 
