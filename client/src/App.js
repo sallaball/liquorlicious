@@ -1,8 +1,9 @@
 import React from 'react';
-import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import SearchDrinks from './pages/SearchDrinks';
 import SavedDrinks from './pages/SavedDrinks';
 import Navbar from './components/Navbar';
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -32,15 +33,19 @@ const client = new ApolloClient({
 
 function App() {
   return (
+
+    // <div>
+    //   <h1>Hello</h1>
+    // </div>
     <ApolloProvider client={client}>
       <Router>
         <>
         <Navbar />
-        <Switch>
+        <Routes>
           <Route exact path='/' component={SearchDrinks} />
           <Route exact path='/saved' component={SavedDrinks} />
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
-        </Switch>
+        </Routes>
         </>
       </Router>
       

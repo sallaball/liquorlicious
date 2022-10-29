@@ -3,23 +3,23 @@ const path = require('path');
 const db = require('./config/connection');
 
 const { ApolloServer } = require('apollo-server-express');
-// const { typeDefs, resolvers } = require('./schemas');
-// const { authMiddleware } = require('./utils/auth'); 
+const { typeDefs, resolvers } = require('./schemas');
+const { authMiddleware } = require('./utils/auth'); 
 
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// const startServer = async () => {
-//     const server = new ApolloServer({
-//         typeDefs,
-//         resolvers,
-//         context: authMiddleware,
-//     });
-//     await server.start();
-//     server.applyMiddleware({ app });
-// };
+const startServer = async () => {
+    const server = new ApolloServer({
+        typeDefs,
+        resolvers,
+        context: authMiddleware,
+    });
+    await server.start();
+    server.applyMiddleware({ app });
+};
 
-// startServer();
+startServer();
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());

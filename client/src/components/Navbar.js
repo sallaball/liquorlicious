@@ -11,7 +11,7 @@ const AppNavbar = () => {
 
     return (
         <>
-        <Navbar bg='dark'>
+        <Navbar bg='dark' variant='dark' expand='lg'>
             <Container fluid>
                 <Navbar.Brand as={Link} to='/'>
                     Beverage recipe Search
@@ -31,7 +31,6 @@ const AppNavbar = () => {
                                     </>
                                 ) : (
                                     <Nav.Link onClick={() => setShowModal(true)}>Login/Sign Up</Nav.Link>
-
                                 )}
                                     </Nav>
                                     </Navbar.Collapse>
