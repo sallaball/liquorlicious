@@ -42,8 +42,8 @@ function App() {
         <>
         <Navbar />
         <Routes>
-          <Route exact path='/' component={SearchDrinks} />
-          <Route exact path='/saved' component={SavedDrinks} />
+          <Route path='/' component={SearchDrinks} />
+          <Route path='/saved' component={SavedDrinks} />
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
         </Routes>
         </>
