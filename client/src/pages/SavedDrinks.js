@@ -6,7 +6,7 @@ import { REMOVE_RECIPE } from '../utils/mutations';
 import Auth from '../utils/auth';
 import { removeRecipeId } from '../utils/localStorage';
 import { useQuery, useMutation } from '@apollo/react-hooks';
-import ExpandPrompt from 'inquirer/lib/prompts/expand';
+
 
 const SavedRecipes = () => {
     const { loading, data } = useQuery(GET_ME);
