@@ -9,7 +9,7 @@ const { authMiddleware } = require('./utils/auth');
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-const startServer = async () => {
+const startServer = async (typeDefs, resolvers) => {
     const server = new ApolloServer({
         typeDefs,
         resolvers,
@@ -19,7 +19,7 @@ const startServer = async () => {
     server.applyMiddleware({ app });
 };
 
-startServer();
+
 
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -30,4 +30,7 @@ if (process.env.NODE_ENV === 'production') {
 
 db.once("open", () => {
     app.listen(PORT, () => console.log(`Now listening on localhost: ${PORT}`));
+    
 });
+
+startServer(typeDefs, resolvers);
