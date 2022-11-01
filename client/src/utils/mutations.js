@@ -33,11 +33,11 @@ mutation saveRecipe($input: RecipeInput) {
         recipeCount
         savedRecipes {
             recipeId
-            authors
+            title
+            ingredients
+            instructions
             image
             link
-            title
-            description
         }
     }
 }
@@ -51,11 +51,11 @@ mutation removeRecipe($recipeId: String!) {
         recipeCount
         savedRecipes {
             recipeId
-            authors
+            title
+            ingredients
+            instructions
             image
             link
-            title
-            description
         }
     }
 }

@@ -52,23 +52,22 @@ const SavedRecipes = () => {
             : 'You have no saved recipes'}
             </h2>
             <CardColumns>
-                {userData.savedRecipes?.map((recipe) => {
+                {userData.savedRecipes?.map((drinks) => {
                     return (
-                        <Card key={recipe.recipeId} border='dark'>
-                            {recipe.image ? (
+                        <Card key={drinks.recipeId} border='dark'>
+                            {drinks.image ? (
                                 <Card.Img
-                                src={recipe.image}
-                                alt={`The picture for ${recipe.title}`}
+                                src={drinks.image}
+                                alt={`The picture for ${drinks.title}`}
                                 variant='top'
                                 />
                             ) : null}
                             <Card.Body>
-                                <Card.Title>{recipe.title}</Card.Title>
-                                <p className='small'>Recipe created by: {recipe.authors}</p>
-                                <Card.Text>{recipe.description}</Card.Text>
+                                <Card.Title>{drinks.title}</Card.Title>
+                                <Card.Text>{drinks.instructions}</Card.Text>
                                 <Button
                                 className='btn-block btn-danger'
-                                onClick={() => handleDeleteRecipe(recipe.recipeId)}
+                                onClick={() => handleDeleteRecipe(drinks.recipeId)}
                                 >
                                     Delete this Recipe!
                                 </Button>
