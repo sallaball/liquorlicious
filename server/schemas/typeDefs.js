@@ -10,11 +10,11 @@ type User {
 }
 type Recipe {
     recipeId: String!
-    authors: [String]
-    description: String
+    ingredients: String
     title: String!
     image: String
     link: String
+    instructions: String
 }
 
 type Auth {
@@ -24,11 +24,11 @@ type Auth {
 
 input RecipeInput {
     recipeId: String!
-    authors: [String]
-    description: String
+    ingredients: String
     title: String!
     image: String
     link: String
+    instructions: String
 }
 
 type Query {
