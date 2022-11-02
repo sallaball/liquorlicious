@@ -41,10 +41,10 @@ function App() {
       <Router>
         <>
         <Navbar /> 
-        <SearchDrinks />
+        {/* <SearchDrinks /> */}
         <Routes>
-          {/* <Route path='/SearchDrinks' component={SearchDrinks} /> */}
-          <Route path='/SavedDrinks' component={SavedDrinks} />
+          <Route path='/' element={<SearchDrinks />} />
+          <Route path='/save' element={<SavedDrinks />} />
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
         </Routes>
         </>

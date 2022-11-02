@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { searchRecipes } from '../utils/API';
+import { searchRecipes, searchIngredients } from '../utils/API';
 import { saveRecipeIds, getSavedRecipeIds } from '../utils/localStorage';
 
 import { SAVE_RECIPE } from '../utils/mutations';
@@ -27,9 +27,11 @@ const SearchRecipes = () => {
         }
 
         try {
-            const response = await searchRecipes(searchInput);
+            const response = await {searchRecipes, searchIngredients}(searchInput);
+            // console.log(response);
 
             if (!response.ok) {
+
                 throw new Error('Something went wrong');
             }
 
@@ -43,11 +45,11 @@ const SearchRecipes = () => {
                 drinkType: drinks.strTags || '',
                 drinkIBA: drinks.strIBA || '',
                 typeOfGlass: drinks.strGlass || '',
-                instructions: drinks.strInstructions,
-                
+                instructions: drinks.strInstructions                
             }));
 
             setSearchedRecipes(recipeData);
+
             setSearchInput('');
         } catch (err) {
             console.error(err);
@@ -85,8 +87,9 @@ const SearchRecipes = () => {
         <Jumbotron fluid className='text-light bg-dark'>
             <Container>
                 <h1>Search for Recipes</h1>
-                <Form onSubmit={(e) => handleFormSubmit(e)}>
-                    <Form.Row>
+                <Form onSubmit={handleFormSubmit}>
+                {/* {(e) => handleFormSubmit(e)}> */}
+                    <Form.Row> 
                         <Col xs={12} md={8}>
                             <Form.Control
                             name='searchInput'
