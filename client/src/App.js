@@ -41,7 +41,6 @@ function App() {
       <Router>
         <>
         <Navbar /> 
-        {/* <SearchDrinks /> */}
         <Routes>
           <Route path='/' element={<SearchDrinks />} />
           <Route path='/save' element={<SavedDrinks />} />

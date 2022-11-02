@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { searchRecipes, searchIngredients } from '../utils/API';
+import { searchRecipes } from '../utils/API';
 import { saveRecipeIds, getSavedRecipeIds } from '../utils/localStorage';
 
 import { SAVE_RECIPE } from '../utils/mutations';
@@ -27,7 +27,7 @@ const SearchRecipes = () => {
         }
 
         try {
-            const response = await {searchRecipes, searchIngredients}(searchInput);
+            const response = await searchRecipes(searchInput);
             // console.log(response);
 
             if (!response.ok) {

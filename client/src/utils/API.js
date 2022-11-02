@@ -52,6 +52,6 @@ export const searchRecipes = (query) => {
         };
     
 
-    export const searchIngredients = (query) => {
-        fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`);
-        };
+    // export const searchIngredients = (query) => {
+    //     fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`);
+    //     };
