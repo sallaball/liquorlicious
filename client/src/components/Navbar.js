@@ -13,18 +13,18 @@ const AppNavbar = () => {
         <>
         <Navbar bg='dark' variant='dark' expand='lg'>
             <Container fluid>
-                <Navbar.Brand as={Link} to='/'>
+                <Navbar.Brand as={Link} to='/' id='header'>
                     Beverage recipe Search
                     </Navbar.Brand>
                     <Navbar.Toggle aria-controls='navbar' />
                     <Navbar.Collapse id='navbar'>
                         <Nav className='ml-auto'>
-                            <Nav.Link as={Link} to='/SearchDrinks'>
-                                Search For Drinks
+                            <Nav.Link as={Link} to='/'>
+                                Search Drinks
                                 </Nav.Link>
                                 {Auth.loggedIn() ? (
                                     <>
-                                    <Nav.Link as={Link} to='/SavedDrinks'>
+                                    <Nav.Link as={Link} to='/save'>
                                         Your Recipes
                                     </Nav.Link>
                                     <Nav.Link onClick={Auth.logout}>Logout</Nav.Link>
