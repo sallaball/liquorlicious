@@ -47,7 +47,28 @@ const SearchRecipes = () => {
                 drinkType: drinks.strTags || '',
                 drinkIBA: drinks.strIBA || '',
                 typeOfGlass: drinks.strGlass || '',
-                instructions: drinks.strInstructions                
+                ingredient1: drinks.strIngredient1,
+                ingredient2: drinks.strIngredient2,
+                ingredient3: drinks.strIngredient3 || '',
+                ingredient4: drinks.strIngredient4 || '',
+                ingredient5: drinks.strIngredient5 || '',
+                ingredient6: drinks.strIngredient6 || '',
+                ingredient7: drinks.strIngredient7 || '',
+                ingredient8: drinks.strIngredient8 || '',
+                ingredient9: drinks.strIngredient9 || '',
+                ingredient10: drinks.strIngredient10 || '',
+                measure1: drinks.strMeasure1,
+                measure2: drinks.strMeasure2,
+                measure3: drinks.strMeasure3 || '',
+                measure4: drinks.strMeasure4 || '',
+                measure5: drinks.strMeasure5 || '',
+                measure6: drinks.strMeasure6 || '',
+                measure7: drinks.strMeasure7 || '',
+                measure8: drinks.strMeasure8 || '',
+                measure9: drinks.strMeasure9 || '',
+                measure10: drinks.strMeasure10 || '',
+                instructions: drinks.strInstructions,
+
             }));
 
             setSearchedRecipes(recipeData);
@@ -127,7 +148,21 @@ const SearchRecipes = () => {
                             ) : null}
                             <Card.Body>
                                 <Card.Title>{drinks.title}</Card.Title>
+                                <Card.Text className='bg-danger text-light'>{drinks.alcoholic}</Card.Text>
+                                <Card.Text>{drinks.drinktype}</Card.Text>
+                                <Card.Text>{drinks.typeOfGlass}</Card.Text>
+                                <Card.Text>{drinks.ingredient1} {drinks.measure1}</Card.Text>
+                                <Card.Text>{drinks.ingredient2} {drinks.measure2}</Card.Text>
+                                <Card.Text>{drinks.ingredient3} {drinks.measure3}</Card.Text>
+                                <Card.Text>{drinks.ingredient4} {drinks.measure4}</Card.Text>
+                                <Card.Text>{drinks.ingredient5} {drinks.measure5}</Card.Text>
+                                <Card.Text>{drinks.ingredient6} {drinks.measure6}</Card.Text>
+                                <Card.Text>{drinks.ingredient7} {drinks.measure7}</Card.Text>
+                                <Card.Text>{drinks.ingredient8} {drinks.measure8}</Card.Text>
+                                <Card.Text>{drinks.ingredient9} {drinks.measure9}</Card.Text>
+                                <Card.Text>{drinks.ingredient10} {drinks.measure10}</Card.Text>
                                 <Card.Text>{drinks.instructions}</Card.Text>
+                                {/* </Card.Text> */}
                                 {Auth.loggedIn() && (
                                     <Button
                                     disabled={savedRecipeIds?.some(
