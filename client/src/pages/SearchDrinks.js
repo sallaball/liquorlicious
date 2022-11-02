@@ -11,6 +11,7 @@ import { useMutation } from '@apollo/client';
 const SearchRecipes = () => {
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchInput, setSearchInput] = useState('');
+    const [ingInput, setIngInput] = useState('');
 
     const [savedRecipeIds, setSavedRecipeIds] = useState(getSavedRecipeIds());
     useEffect(() => {
@@ -22,13 +23,14 @@ const SearchRecipes = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        if (!searchInput) {
-            return false;
-        }
+        // if (!searchInput) {
+        //     return false;
+        // }
 
         try {
             const response = await searchRecipes(searchInput);
-            const otherResponse = await searchIngredients(searchInput);
+            console.log(ingInput)
+            const otherResponse = await searchIngredients(ingInput);
             console.log(otherResponse)
             console.log(response);
 
@@ -147,7 +149,32 @@ const SearchRecipes = () => {
                 })}
             </CardColumns>
         </Container>
-
+        {/* form 2 call ingredients API */}
+        <Jumbotron fluid className='text-light bg-dark'>
+            <Container>
+                <h1>Search for ingredients</h1>
+                <Form onSubmit={handleFormSubmit}>
+                {/* {(e) => handleFormSubmit(e)}> */}
+                    <Form.Row> 
+                        <Col xs={12} md={8}>
+                            <Form.Control
+                            name='ingInput'
+                            value={ingInput}
+                            onChange={(e) => setIngInput(e.target.value)}
+                            type='text'
+                            size='lg'
+                            placeholder='Search for a Drink Recipe'
+                            />
+                        </Col>
+                        <Col xs={12} md={4}>
+                            <Button type='submit' variant='success' size='lg'>
+                                Submit Search
+                            </Button>
+                        </Col>
+                    </Form.Row>
+                </Form>          
+            </Container>
+        </Jumbotron>
         </>
     );
 };
