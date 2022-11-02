@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { searchRecipes } from '../utils/API';
+import { searchIngredients, searchRecipes } from '../utils/API';
 import { saveRecipeIds, getSavedRecipeIds } from '../utils/localStorage';
 
 import { SAVE_RECIPE } from '../utils/mutations';
@@ -28,16 +28,16 @@ const SearchRecipes = () => {
 
         try {
             const response = await searchRecipes(searchInput);
-            // console.log(response);
+            const otherResponse = await searchIngredients(searchInput);
+            console.log(otherResponse)
+            console.log(response);
 
-            if (!response.ok) {
+            
 
-                throw new Error('Something went wrong');
-            }
+            const { drinks } = await response.json();
+            console.log(drinks)
 
-            const { items } = await response.json();
-
-            const recipeData = items.map((drinks) => ({
+            const recipeData = drinks.map((drinks) => ({
                 recipeId: drinks.idDrink,
                 title: drinks.strDrink,
                 image: drinks.strDrinkThumb || '',
