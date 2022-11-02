@@ -48,6 +48,14 @@ export const deleteRecipe = (recipeId, token) => {
 
 // http://www.thecocktaildb.com/api/json/v1/1/search.php?s=margarita
 export const searchRecipes = (query) => {
-    return fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`);
-    // fetch(`www.thecocktaildb.com/api/json/v1/1/search.php?i=${query}`);
+     fetch(`https://www.thecocktaildb.com/api/json/v1/1/search.php?s=${query}`).then((res) => {
+        console.log('res', res)
+        return fetch(`https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=${query}`).then((res) => {
+            console.log('res', res)
+            return res
+        })
+    }).catch((err) => {
+        console.log('error', err)
+    })
+
 };

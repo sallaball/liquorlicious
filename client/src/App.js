@@ -40,10 +40,11 @@ function App() {
     <ApolloProvider client={client}>
       <Router>
         <>
-        <Navbar />
+        <Navbar /> 
+        <SearchDrinks />
         <Routes>
-          <Route path='/' component={SearchDrinks} />
-          <Route path='/saved' component={SavedDrinks} />
+          {/* <Route path='/SearchDrinks' component={SearchDrinks} /> */}
+          <Route path='/SavedDrinks' component={SavedDrinks} />
           <Route render={() => <h1 className='display-2'>Wrong page!</h1>} />
         </Routes>
         </>

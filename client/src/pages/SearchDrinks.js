@@ -6,7 +6,7 @@ import { searchRecipes } from '../utils/API';
 import { saveRecipeIds, getSavedRecipeIds } from '../utils/localStorage';
 
 import { SAVE_RECIPE } from '../utils/mutations';
-import { useMutation } from '@apollo/react-hooks';
+import { useMutation } from '@apollo/client';
 
 const SearchRecipes = () => {
     const [searchedRecipes, setSearchedRecipes] = useState([]);
@@ -43,7 +43,6 @@ const SearchRecipes = () => {
                 drinkType: drinks.strTags || '',
                 drinkIBA: drinks.strIBA || '',
                 typeOfGlass: drinks.strGlass || '',
-                
                 instructions: drinks.strInstructions,
                 
             }));
@@ -86,7 +85,7 @@ const SearchRecipes = () => {
         <Jumbotron fluid className='text-light bg-dark'>
             <Container>
                 <h1>Search for Recipes</h1>
-                <Form onSubmit={handleFormSubmit}>
+                <Form onSubmit={(e) => handleFormSubmit(e)}>
                     <Form.Row>
                         <Col xs={12} md={8}>
                             <Form.Control
