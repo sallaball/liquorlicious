@@ -2,16 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { searchIngredients, searchRecipes } from '../utils/API';
+import { searchRecipes, searchIngredients } from '../utils/API';
 import { saveRecipeIds, getSavedRecipeIds } from '../utils/localStorage';
 
 import { SAVE_RECIPE } from '../utils/mutations';
 import { useMutation } from '@apollo/client';
 
+
 const SearchRecipes = () => {
     const [searchedRecipes, setSearchedRecipes] = useState([]);
     const [searchInput, setSearchInput] = useState('');
-    const [ingInput, setIngInput] = useState('');
 
     const [savedRecipeIds, setSavedRecipeIds] = useState(getSavedRecipeIds());
     useEffect(() => {
@@ -23,13 +23,15 @@ const SearchRecipes = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
+        if (!searchInput) {
+            return false;
+        }
+
         try {
             const response = await searchRecipes(searchInput);
-            console.log(ingInput)
-            const otherResponse = await searchIngredients(ingInput);
-            console.log(otherResponse)
-            console.log(response);
-
+            if (!response.ok) {
+                throw new Error('Something went wrong!');
+            }
             
 
             const { drinks } = await response.json();
@@ -73,70 +75,53 @@ const SearchRecipes = () => {
         } catch (err) {
             console.error(err);
         }
+    
     };
 
     const SearchIngredients = () => {
         const [searchedIngredients, setSearchedIngredients] = useState([]);
-        const [otherSeacrhInput, setOhterSearchInput] = useState('');
-        const [ingInput, setIngInput] = useState('');
-
-     
-
-
+        const [searchInput, setSearchInput] = useState('');
+        
     
-
-    const handleFormSubmit = async (event) => {
-        event.preventDefault();
-
-        try {
-            const response = await searchIngredients(searchInput);
-            console.log(response);
-
-            
-
-            const { drinks } = await response.json();
-            console.log(drinks)
-
-            const ingredientData = drinks.map((drinks) => ({
-                recipeId: drinks.idDrink,
-                title: drinks.strDrink,
-                image: drinks.strDrinkThumb || '',
-                alcoholic: drinks.strAlcoholic || 'Non-alcoholic',
-                drinkType: drinks.strTags || '',
-                drinkIBA: drinks.strIBA || '',
-                typeOfGlass: drinks.strGlass || '',
-                ingredient1: drinks.strIngredient1,
-                ingredient2: drinks.strIngredient2,
-                ingredient3: drinks.strIngredient3 || '',
-                ingredient4: drinks.strIngredient4 || '',
-                ingredient5: drinks.strIngredient5 || '',
-                ingredient6: drinks.strIngredient6 || '',
-                ingredient7: drinks.strIngredient7 || '',
-                ingredient8: drinks.strIngredient8 || '',
-                ingredient9: drinks.strIngredient9 || '',
-                ingredient10: drinks.strIngredient10 || '',
-                measure1: drinks.strMeasure1,
-                measure2: drinks.strMeasure2,
-                measure3: drinks.strMeasure3 || '',
-                measure4: drinks.strMeasure4 || '',
-                measure5: drinks.strMeasure5 || '',
-                measure6: drinks.strMeasure6 || '',
-                measure7: drinks.strMeasure7 || '',
-                measure8: drinks.strMeasure8 || '',
-                measure9: drinks.strMeasure9 || '',
-                measure10: drinks.strMeasure10 || '',
-                instructions: drinks.strInstructions,
-
-            }));
-
-            setSearchedIngredients(ingredientData);
-
-            setSearchInput('');
-        } catch (err) {
-            console.error(err);
-        }
-    }
-    };
+        const [savedRecipeIds, setSavedRecipeIds] = useState(getSavedRecipeIds());
+        useEffect(() => {
+            return () => saveRecipeIds(savedRecipeIds);
+        });
+    
+        const [saveRecipe] = useMutation(SAVE_RECIPE);
+    
+        const handleFormSubmit = async (event) => {
+            event.preventDefault();
+    
+            if (!searchInput) {
+                return false;
+            }
+    
+            try {
+                const response = await searchIngredients(searchInput);
+                if (!response.ok) {
+                    throw new Error('Something went wrong!');
+                }
+                
+    
+                const { drinks } = await response.json();
+                console.log(drinks)
+    
+                const recipeData = drinks.map((drinks) => ({
+                    recipeId: drinks.idDrink,
+                    title: drinks.strDrink,
+                    image: drinks.strDrinkThumb || '',
+    
+                }));
+    
+                setSearchedIngredients(recipeData);
+    
+                setSearchInput('');
+            } catch (err) {
+                console.error(err);
+            }
+        
+        };
 
     const handleSaveRecipe = async (recipeId) => {
         const recipeToSave = searchedRecipes.find((drinks) => drinks.recipeId === recipeId);
@@ -162,6 +147,7 @@ const SearchRecipes = () => {
         } catch (err) {
             console.error(err);
         }
+    
     };
 
     return (
@@ -170,7 +156,6 @@ const SearchRecipes = () => {
             <Container fluid>
                 <h1 class='searchHeaders'>Search for Recipes</h1>
                 <Form onSubmit={handleFormSubmit}>
-                {/* {(e) => handleFormSubmit(e)}> */}
                     <Form.Row> 
                         <Col xs={6} md={3}>
                             <Form.Control
@@ -193,13 +178,12 @@ const SearchRecipes = () => {
             <Container fluid>
                 <h1 id='seachHeaders'>Search for ingredients</h1>
                 <Form onSubmit={handleFormSubmit}>
-                {/* {(e) => handleFormSubmit(e)}> */}
                     <Form.Row> 
                         <Col xs={6} md={3}>
                             <Form.Control
-                            name='ingInput'
-                            value={ingInput}
-                            onChange={(e) => setIngInput(e.target.value)}
+                            name='searchInput'
+                            value={searchInput}
+                            onChange={(e) => setSearchInput(e.target.value)}
                             type='text'
                             size='lg'
                             placeholder='Search drink ingredients'
@@ -217,8 +201,8 @@ const SearchRecipes = () => {
 
         <Container fluid>
             <h2>
-                {searchedRecipes.length
-                ? `Viewing ${searchedRecipes.length} results:`
+                {[searchedRecipes.length, searchedIngredients.length]
+                ? `Viewing ${[searchedRecipes.length, searchedIngredients.length]} results:`
             : 'Search for a recipe to begin'}
             </h2>
             <CardColumns>
@@ -265,11 +249,41 @@ const SearchRecipes = () => {
                     );
                 })}
             </CardColumns>
+            <CardColumns>
+                {searchedIngredients.map((drinks) => {
+                    return (
+                        <Card key={drinks.recipeId} border='dark'>
+                            {drinks.image ? (
+                                <Card.Img src={drinks.image} alt={`A picture of ${drinks.title}`} variant='top' />
+                            ) : null}
+                            <Card.Body>
+                                <Card.Title>{drinks.title}</Card.Title>
+                                {Auth.loggedIn() && (
+                                    <Button
+                                    disabled={savedRecipeIds?.some(
+                                        (savedRecipeId) => savedRecipeId === drinks.recipeId
+                                    )}
+                                    className='btn-block btn-info'
+                                    onClick={() => handleSaveRecipe(drinks.recipeId)}
+                                    >
+                                        {savedRecipeIds?.some(
+                                            (savedRecipeId) => savedRecipeId === drinks.recipeId
+                                        )
+                                        ? 'This recipe has already been saved'
+                                    : 'Save Recipe'}
+                                    </Button>
+                                )}
+                            </Card.Body>
+                        </Card>
+                    );
+                })}
+            </CardColumns>
         </Container>
         {/* form 2 call ingredients API */}
        
         </>
-    );
-};
+    
+            );
+}};
 
-export default SearchRecipes;
+export default { SearchRecipes, SearchIngredients };
