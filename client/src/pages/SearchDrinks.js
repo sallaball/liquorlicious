@@ -23,10 +23,6 @@ const SearchRecipes = () => {
     const handleFormSubmit = async (event) => {
         event.preventDefault();
 
-        // if (!searchInput) {
-        //     return false;
-        // }
-
         try {
             const response = await searchRecipes(searchInput);
             console.log(ingInput)
@@ -79,6 +75,69 @@ const SearchRecipes = () => {
         }
     };
 
+    const SearchIngredients = () => {
+        const [searchedIngredients, setSearchedIngredients] = useState([]);
+        const [otherSeacrhInput, setOhterSearchInput] = useState('');
+        const [ingInput, setIngInput] = useState('');
+
+     
+
+
+    
+
+    const handleFormSubmit = async (event) => {
+        event.preventDefault();
+
+        try {
+            const response = await searchIngredients(searchInput);
+            console.log(response);
+
+            
+
+            const { drinks } = await response.json();
+            console.log(drinks)
+
+            const ingredientData = drinks.map((drinks) => ({
+                recipeId: drinks.idDrink,
+                title: drinks.strDrink,
+                image: drinks.strDrinkThumb || '',
+                alcoholic: drinks.strAlcoholic || 'Non-alcoholic',
+                drinkType: drinks.strTags || '',
+                drinkIBA: drinks.strIBA || '',
+                typeOfGlass: drinks.strGlass || '',
+                ingredient1: drinks.strIngredient1,
+                ingredient2: drinks.strIngredient2,
+                ingredient3: drinks.strIngredient3 || '',
+                ingredient4: drinks.strIngredient4 || '',
+                ingredient5: drinks.strIngredient5 || '',
+                ingredient6: drinks.strIngredient6 || '',
+                ingredient7: drinks.strIngredient7 || '',
+                ingredient8: drinks.strIngredient8 || '',
+                ingredient9: drinks.strIngredient9 || '',
+                ingredient10: drinks.strIngredient10 || '',
+                measure1: drinks.strMeasure1,
+                measure2: drinks.strMeasure2,
+                measure3: drinks.strMeasure3 || '',
+                measure4: drinks.strMeasure4 || '',
+                measure5: drinks.strMeasure5 || '',
+                measure6: drinks.strMeasure6 || '',
+                measure7: drinks.strMeasure7 || '',
+                measure8: drinks.strMeasure8 || '',
+                measure9: drinks.strMeasure9 || '',
+                measure10: drinks.strMeasure10 || '',
+                instructions: drinks.strInstructions,
+
+            }));
+
+            setSearchedIngredients(ingredientData);
+
+            setSearchInput('');
+        } catch (err) {
+            console.error(err);
+        }
+    }
+    };
+
     const handleSaveRecipe = async (recipeId) => {
         const recipeToSave = searchedRecipes.find((drinks) => drinks.recipeId === recipeId);
 
@@ -107,13 +166,13 @@ const SearchRecipes = () => {
 
     return (
         <>
-        <Jumbotron fluid className='text-light bg-dark'>
-            <Container>
-                <h1>Search for Recipes</h1>
+        <Jumbotron fluid className='text-light bg-dark justify-content-evenly' id='searchBars'>
+            <Container fluid>
+                <h1 class='searchHeaders'>Search for Recipes</h1>
                 <Form onSubmit={handleFormSubmit}>
                 {/* {(e) => handleFormSubmit(e)}> */}
                     <Form.Row> 
-                        <Col xs={12} md={8}>
+                        <Col xs={6} md={3}>
                             <Form.Control
                             name='searchInput'
                             value={searchInput}
@@ -125,7 +184,30 @@ const SearchRecipes = () => {
                         </Col>
                         <Col xs={12} md={4}>
                             <Button type='submit' variant='success' size='lg'>
-                                Submit Search
+                                Submit
+                            </Button>
+                        </Col>
+                    </Form.Row>
+                </Form>          
+            </Container>
+            <Container fluid>
+                <h1 id='seachHeaders'>Search for ingredients</h1>
+                <Form onSubmit={handleFormSubmit}>
+                {/* {(e) => handleFormSubmit(e)}> */}
+                    <Form.Row> 
+                        <Col xs={6} md={3}>
+                            <Form.Control
+                            name='ingInput'
+                            value={ingInput}
+                            onChange={(e) => setIngInput(e.target.value)}
+                            type='text'
+                            size='lg'
+                            placeholder='Search drink ingredients'
+                            />
+                        </Col>
+                        <Col xs={6} md={2}>
+                            <Button type='submit' variant='success' size='lg'>
+                                Submit
                             </Button>
                         </Col>
                     </Form.Row>
@@ -133,7 +215,7 @@ const SearchRecipes = () => {
             </Container>
         </Jumbotron>
 
-        <Container>
+        <Container fluid>
             <h2>
                 {searchedRecipes.length
                 ? `Viewing ${searchedRecipes.length} results:`
@@ -185,31 +267,7 @@ const SearchRecipes = () => {
             </CardColumns>
         </Container>
         {/* form 2 call ingredients API */}
-        <Jumbotron fluid className='text-light bg-dark'>
-            <Container>
-                <h1>Search for ingredients</h1>
-                <Form onSubmit={handleFormSubmit}>
-                {/* {(e) => handleFormSubmit(e)}> */}
-                    <Form.Row> 
-                        <Col xs={12} md={8}>
-                            <Form.Control
-                            name='ingInput'
-                            value={ingInput}
-                            onChange={(e) => setIngInput(e.target.value)}
-                            type='text'
-                            size='lg'
-                            placeholder='Search for a Drink Recipe'
-                            />
-                        </Col>
-                        <Col xs={12} md={4}>
-                            <Button type='submit' variant='success' size='lg'>
-                                Submit Search
-                            </Button>
-                        </Col>
-                    </Form.Row>
-                </Form>          
-            </Container>
-        </Jumbotron>
+       
         </>
     );
 };

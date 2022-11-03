@@ -17,3 +17,7 @@ code {
   font-style:oblique;
   color:rgb(26, 182, 182);
 }
+
+#searchHeaders {
+  font-size: 6vh;
+}
