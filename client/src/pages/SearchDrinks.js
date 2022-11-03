@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Jumbotron, Container, Col, Form, Button, Card, CardColumns } from 'react-bootstrap';
 
 import Auth from '../utils/auth';
-import { searchRecipes, searchIngredients } from '../utils/API';
+import { searchRecipes } from '../utils/API';
 import { saveRecipeIds, getSavedRecipeIds } from '../utils/localStorage';
 
 import { SAVE_RECIPE } from '../utils/mutations';
@@ -78,50 +78,50 @@ const SearchRecipes = () => {
     
     };
 
-    const SearchIngredients = () => {
-        const [searchedIngredients, setSearchedIngredients] = useState([]);
-        const [searchInput, setSearchInput] = useState('');
+    // const SearchIngredients = () => {
+    //     const [searchedIngredients, setSearchedIngredients] = useState([]);
+    //     const [searchInput, setSearchInput] = useState('');
         
     
-        const [savedRecipeIds, setSavedRecipeIds] = useState(getSavedRecipeIds());
-        useEffect(() => {
-            return () => saveRecipeIds(savedRecipeIds);
-        });
+    //     const [savedRecipeIds, setSavedRecipeIds] = useState(getSavedRecipeIds());
+    //     useEffect(() => {
+    //         return () => saveRecipeIds(savedRecipeIds);
+    //     });
     
-        const [saveRecipe] = useMutation(SAVE_RECIPE);
+    //     const [saveRecipe] = useMutation(SAVE_RECIPE);
     
-        const handleFormSubmit = async (event) => {
-            event.preventDefault();
+    //     const handleFormSubmit = async (event) => {
+    //         event.preventDefault();
     
-            if (!searchInput) {
-                return false;
-            }
+    //         if (!searchInput) {
+    //             return false;
+    //         }
     
-            try {
-                const response = await searchIngredients(searchInput);
-                if (!response.ok) {
-                    throw new Error('Something went wrong!');
-                }
+    //         try {
+    //             const response = await searchIngredients(searchInput);
+    //             if (!response.ok) {
+    //                 throw new Error('Something went wrong!');
+    //             }
                 
     
-                const { drinks } = await response.json();
-                console.log(drinks)
+    //             const { drinks } = await response.json();
+    //             console.log(drinks)
     
-                const recipeData = drinks.map((drinks) => ({
-                    recipeId: drinks.idDrink,
-                    title: drinks.strDrink,
-                    image: drinks.strDrinkThumb || '',
+    //             const recipeData = drinks.map((drinks) => ({
+    //                 recipeId: drinks.idDrink,
+    //                 title: drinks.strDrink,
+    //                 image: drinks.strDrinkThumb || '',
     
-                }));
+    //             }));
     
-                setSearchedIngredients(recipeData);
+    //             setSearchedIngredients(recipeData);
     
-                setSearchInput('');
-            } catch (err) {
-                console.error(err);
-            }
+    //             setSearchInput('');
+    //         } catch (err) {
+    //             console.error(err);
+    //         }
         
-        };
+    //     };
 
     const handleSaveRecipe = async (recipeId) => {
         const recipeToSave = searchedRecipes.find((drinks) => drinks.recipeId === recipeId);
@@ -201,8 +201,8 @@ const SearchRecipes = () => {
 
         <Container fluid>
             <h2>
-                {[searchedRecipes.length, searchedIngredients.length]
-                ? `Viewing ${[searchedRecipes.length, searchedIngredients.length]} results:`
+                {searchedRecipes.length
+                ? `Viewing ${searchedRecipes.length} results:`
             : 'Search for a recipe to begin'}
             </h2>
             <CardColumns>
@@ -249,7 +249,7 @@ const SearchRecipes = () => {
                     );
                 })}
             </CardColumns>
-            <CardColumns>
+            {/* <CardColumns>
                 {searchedIngredients.map((drinks) => {
                     return (
                         <Card key={drinks.recipeId} border='dark'>
@@ -277,13 +277,13 @@ const SearchRecipes = () => {
                         </Card>
                     );
                 })}
-            </CardColumns>
+            </CardColumns> */}
         </Container>
         {/* form 2 call ingredients API */}
        
         </>
     
             );
-}};
+};
 
-export default { SearchRecipes, SearchIngredients };
+export default SearchRecipes;
