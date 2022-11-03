@@ -175,28 +175,6 @@ const SearchRecipes = () => {
                     </Form.Row>
                 </Form>          
             </Container>
-            <Container fluid>
-                <h1 id='seachHeaders'>Search for ingredients</h1>
-                <Form onSubmit={handleFormSubmit}>
-                    <Form.Row> 
-                        <Col xs={6} md={3}>
-                            <Form.Control
-                            name='searchInput'
-                            value={searchInput}
-                            onChange={(e) => setSearchInput(e.target.value)}
-                            type='text'
-                            size='lg'
-                            placeholder='Search drink ingredients'
-                            />
-                        </Col>
-                        <Col xs={6} md={2}>
-                            <Button type='submit' variant='success' size='lg'>
-                                Submit
-                            </Button>
-                        </Col>
-                    </Form.Row>
-                </Form>          
-            </Container>
         </Jumbotron>
 
         <Container fluid>
@@ -249,35 +227,7 @@ const SearchRecipes = () => {
                     );
                 })}
             </CardColumns>
-            {/* <CardColumns>
-                {searchedIngredients.map((drinks) => {
-                    return (
-                        <Card key={drinks.recipeId} border='dark'>
-                            {drinks.image ? (
-                                <Card.Img src={drinks.image} alt={`A picture of ${drinks.title}`} variant='top' />
-                            ) : null}
-                            <Card.Body>
-                                <Card.Title>{drinks.title}</Card.Title>
-                                {Auth.loggedIn() && (
-                                    <Button
-                                    disabled={savedRecipeIds?.some(
-                                        (savedRecipeId) => savedRecipeId === drinks.recipeId
-                                    )}
-                                    className='btn-block btn-info'
-                                    onClick={() => handleSaveRecipe(drinks.recipeId)}
-                                    >
-                                        {savedRecipeIds?.some(
-                                            (savedRecipeId) => savedRecipeId === drinks.recipeId
-                                        )
-                                        ? 'This recipe has already been saved'
-                                    : 'Save Recipe'}
-                                    </Button>
-                                )}
-                            </Card.Body>
-                        </Card>
-                    );
-                })}
-            </CardColumns> */}
+            
         </Container>
         {/* form 2 call ingredients API */}
        
