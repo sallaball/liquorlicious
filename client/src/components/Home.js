@@ -4,7 +4,7 @@ import Carousel from 'react-bootstrap/Carousel';
 
 function ImageCarousel() {
   return (
-    <Carousel fade>
+    <Carousel fade id='carousel'>
       <Carousel.Item rounded >
         <img
           className="d-block w-100"
@@ -25,13 +25,6 @@ function ImageCarousel() {
           src="images/img.jpg"
           alt="Third slide"
         />
-{/* 
-        <Carousel.Caption>
-          <h3>Third slide label</h3>
-          <p>
-            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-          </p>
-        </Carousel.Caption> */}
       </Carousel.Item>
     </Carousel>
   );

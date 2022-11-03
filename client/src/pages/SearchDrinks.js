@@ -154,7 +154,7 @@ const SearchRecipes = () => {
         <>
         <Jumbotron fluid className='bg-dark text-light' id='searchBars'>
             <Container fluid>
-                <h1 class='searchHeaders'>Search for Recipes</h1>
+                <h1 id='searchHeaders'>Search for Recipes</h1>
                 <Form onSubmit={handleFormSubmit}>
                     <Form.Row> 
                         <Col xs={6} md={3}>

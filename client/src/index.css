@@ -16,15 +16,21 @@ code {
   font-size: 6vh;
   font-style:oblique;
   color:rgb(26, 182, 182);
+  font-weight: bold;
 }
 
 #searchHeaders {
-  font-size: 6vh;
+  font-size: 4vh;
+  color:rgb(26, 182, 182);
 }
 
 #navlink {
-  border: 1px solid white;
+  border: 1px solid rgb(26, 182, 182);
   border-radius: 5px;
   margin: 3px;
-  color: white;
+  color: rgb(26, 182, 182);
 }
+
+/* #carousel {
+  height: 30vh;
+} */
