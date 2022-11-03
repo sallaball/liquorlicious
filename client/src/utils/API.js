@@ -29,7 +29,8 @@ export const loginUser = (userData) => {
 
 export const saveRecipe = (recipeData, token) => {
     return fetch('/api/users', {
-        method: {
+        method: 'PUT',
+        headers: {
             'Content-Type': 'application/json',
             authorization: `Bearer ${token}`,
         },

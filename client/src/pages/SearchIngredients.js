@@ -83,10 +83,10 @@ import { useMutation } from '@apollo/client';
 
     return (
         <>
-        <Jumbotron fluid className='text-light bg-dark justify-content-evenly' id='searchBars'>
+        <Jumbotron fluid className='bg-dark text-light' id='searchBars'>
             
             <Container fluid>
-                <h1 id='seachHeaders'>Search for ingredients</h1>
+                <h1 id='searchHeaders'>Search for ingredients</h1>
                 <Form onSubmit={handleFormSubmit}>
                     <Form.Row> 
                         <Col xs={6} md={3}>
@@ -113,7 +113,7 @@ import { useMutation } from '@apollo/client';
             <h2>
                 {searchedIngredients.length
                 ? `Viewing ${searchedIngredients.length} results:`
-            : 'Search for an Ingredient to find recipes'}
+            : 'Search Recipes by Ingredient'}
             </h2>
            
             <CardColumns>

@@ -152,7 +152,7 @@ const SearchRecipes = () => {
 
     return (
         <>
-        <Jumbotron fluid className='text-light bg-dark justify-content-evenly' id='searchBars'>
+        <Jumbotron fluid className='bg-dark text-light' id='searchBars'>
             <Container fluid>
                 <h1 class='searchHeaders'>Search for Recipes</h1>
                 <Form onSubmit={handleFormSubmit}>
@@ -181,12 +181,12 @@ const SearchRecipes = () => {
             <h2>
                 {searchedRecipes.length
                 ? `Viewing ${searchedRecipes.length} results:`
-            : 'Search for a recipe to begin'}
+            : 'Search Drink Name to find the Recipe'}
             </h2>
             <CardColumns>
                 {searchedRecipes.map((drinks) => {
                     return (
-                        <Card key={drinks.recipeId} border='dark'>
+                        <Card key={drinks.recipeId} border='info'>
                             {drinks.image ? (
                                 <Card.Img src={drinks.image} alt={`A picture of ${drinks.title}`} variant='top' />
                             ) : null}

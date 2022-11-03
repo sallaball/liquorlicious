@@ -11,8 +11,8 @@ import ImageCarousel from './components/Home';
 import {
   ApolloClient,
   InMemoryCache,
-  createHttpLink,
   ApolloProvider,
+  createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
 
@@ -37,10 +37,6 @@ const client = new ApolloClient({
 
 function App() {
   return (
-
-    // <div>
-    //   <h1>Hello</h1>
-    // </div>
     <ApolloProvider client={client}>
       <Router>
         <>
