@@ -8,7 +8,7 @@ function ImageCarousel() {
       <Carousel.Item rounded >
         <img
           className="d-block w-100"
-          src="https://img.freepik.com/free-photo/selection-various-cocktails-table_140725-2909.jpg?w=2000"
+          src="https://image.shutterstock.com/image-photo/different-delicious-cocktails-on-black-260nw-1890842638.jpg"
           alt="First slide"
         />
       </Carousel.Item>
@@ -22,7 +22,21 @@ function ImageCarousel() {
       <Carousel.Item>
         <img
           className="d-block w-100"
-          src="images/img.jpg"
+          src="https://www.greatbritishfoodawards.com/assets/images/recipes/shutterstock_626483960.jpg"
+          alt="Third slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://i.pinimg.com/originals/fa/82/2e/fa822e5adb1a8ffc33b64d4256903da9.jpg"
+          alt="Third slide"
+        />
+      </Carousel.Item>
+      <Carousel.Item>
+        <img
+          className="d-block w-100"
+          src="https://media.istockphoto.com/photos/blue-mojito-cocktail-picture-id585779180?k=6&m=585779180&s=170667a&w=0&h=GFVNSiTIKuUl--TQOMrfGlrs7CD_uKf797FKizXy6a8="
           alt="Third slide"
         />
       </Carousel.Item>

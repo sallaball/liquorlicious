@@ -125,6 +125,7 @@ const SearchRecipes = () => {
 
     const handleSaveRecipe = async (recipeId) => {
         const recipeToSave = searchedRecipes.find((drinks) => drinks.recipeId === recipeId);
+        console.log(recipeToSave)
 
         const token = Auth.loggedIn() ? Auth.getToken() : null;
 
@@ -136,6 +137,7 @@ const SearchRecipes = () => {
             const response = await saveRecipe({
                 variables: {
                     input: recipeToSave,
+                    
                 },
             });
 
@@ -192,7 +194,7 @@ const SearchRecipes = () => {
                             ) : null}
                             <Card.Body>
                                 <Card.Title>{drinks.title}</Card.Title>
-                                <Card.Text className='bg-danger text-light'>{drinks.alcoholic}</Card.Text>
+                                <Card.Text className='bg-danger text-light text-center'>{drinks.alcoholic}</Card.Text>
                                 <Card.Text>{drinks.drinktype}</Card.Text>
                                 <Card.Text>{drinks.typeOfGlass}</Card.Text>
                                 <Card.Text>{drinks.ingredient1} {drinks.measure1}</Card.Text>
